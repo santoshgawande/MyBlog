@@ -1,7 +1,5 @@
 ## Flask-MyBlog
-MyBlog created using flask and trying to deploy using CI on Heroku Server. When I push changes then it will automatically build and reflect changes on production.
+This is a Flask+PostgreSQL web application for deplying on Heroku.,
+Deployed project is,
+https://san-webapp.herokuapp.com/
 
-**Run app:**
-```bash
-python blog.py
-```
