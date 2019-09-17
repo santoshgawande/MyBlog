@@ -81,15 +81,13 @@ def login():
                 #app.logger.info("Password matched..!")
                 #error ="Password Matched"
                 #return render_template("login.html")
-            else:
-                error ="Password Not Match"
-                return render_template("login.html",error=error)
+            error ="Password Not Match"
+            return render_template("login.html",error=error)
                 #app.logger.info("Password is MisMatched")
             cur.close()
-        else:
-            #app.logger.info("NO User")
-            error ="User doesn't exist"
-            return render_template("login.html",error=error)
+                    #app.logger.info("NO User")
+        error ="User doesn't exist"
+        return render_template("login.html",error=error)
 
     return render_template("login.html")
 
@@ -98,9 +96,8 @@ def is_logged_in(f):
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
             return f(*args, **kwargs)
-        else:
-            flash("Unauthorized User","error")
-            return redirect(url_for('login'))
+        flash("Unauthorized User","error")
+        return redirect(url_for('login'))
     return wrap
 
 @app.route("/dashboard")
@@ -121,4 +118,3 @@ def logout():
 if __name__ =='__main__':
     app.secret_key ='12345'
     app.run()
-
