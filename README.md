@@ -3,5 +3,5 @@ MyBlog created using flask and trying to deploy using CI on Heroku Server. When 
 
 **Run app:**
 ```bash
-python blogs.py
+python blog.py
 ```
