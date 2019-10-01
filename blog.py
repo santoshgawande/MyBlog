@@ -1,20 +1,19 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session, logging 
 from data import Articles
-from flask_mysqldb import MySQL 
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+import psycopg2
+import urlparse
+
 app =Flask(__name__)
 
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 's'
-app.config['MYSQL_DB'] = 'blog'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+schema = "schema.sql"
 
-mysql = MySQL(app)
-
-
+conn = psycopg2.connect(db)
+cur = conn.cursor()
 
 Articles =Articles()
 @app.route("/")
@@ -50,10 +49,11 @@ def register():
         email = form.email.data
         username = form.username.data
         password = sha256_crypt.encrypt(str(form.password.data))
-
-        cur =mysql.connection.cursor()
+       
+        #cur =mysql.connection.cursor()
         cur.execute("INSERT INTO users(name,username,email,password) VALUES(%s,%s,%s,%s)",(name,username,email,password))
-        mysql.connection.commit()
+        conn.commit()
+        #mysql.connection.commit()
         cur.close()
         flash("You are registered..!!")
         redirect(url_for('main'))
@@ -66,7 +66,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        cur =mysql.connection.cursor()
+        #cur =mysql.connection.cursor()
         result = cur.execute("SELECT * from users where username=%s",[username])
         if result > 0:
             data =cur.fetchone()
