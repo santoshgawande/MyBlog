@@ -4,11 +4,11 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 import psycopg2
-import urlparse
-
+import os
+from urllib.parse import urlparse
 app =Flask(__name__)
 
-url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+url = urlparse(os.environ.get('DATABASE_URL'))
 db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 schema = "schema.sql"
 
