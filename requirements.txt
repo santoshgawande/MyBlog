@@ -9,6 +9,6 @@ jinja2>=2.11.3
 MarkupSafe==1.1.1
 passlib==1.6.1
 psycopg2==2.8.3
-urllib3==1.25.6
+urllib3==1.25.8
 Werkzeug==0.16.0
 WTForms==2.2.1
