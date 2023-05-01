@@ -1,5 +1,5 @@
 Click==7.0
-Flask==1.1.1
+Flask==2.3.2
 Flask-Passlib==0.1
 Flask-Psycopg2==1.3
 Flask-WTF==0.14.2
